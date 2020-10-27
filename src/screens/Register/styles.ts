@@ -6,6 +6,8 @@ export const Container = styled.SafeAreaView`
   background-color: #13131a;
 `;
 
+export const KeyBoardContainer = styled.KeyboardAvoidingView``;
+
 export const Loading = styled.ActivityIndicator.attrs({
   color: "#FFFFFF",
   size: "small",

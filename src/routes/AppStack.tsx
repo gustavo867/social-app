@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { UserContext } from "../context/UserContext";
 
 import AuthStack from "./AuthStack";
 import MainStack from "./MainStack";
+import Loading from "../screens/Loading";
 
 export interface Context {
   username: string;
@@ -15,15 +15,12 @@ export interface Context {
 
 const AppStack: React.FC = () => {
   const Stack = createStackNavigator();
-  const [user] = useContext<any>(UserContext);
 
   return (
     <Stack.Navigator headerMode="none">
-      {user.isLoggedIn ? (
-        <Stack.Screen name="Main" component={MainStack} />
-      ) : (
-        <Stack.Screen name="Auth" component={AuthStack} />
-      )}
+      <Stack.Screen name="Loading" component={Loading} />
+      <Stack.Screen name="Auth" component={AuthStack} />
+      <Stack.Screen name="Main" component={MainStack} />
     </Stack.Navigator>
   );
 };

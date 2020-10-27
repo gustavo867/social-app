@@ -74,6 +74,7 @@ const MainStack: React.FC = () => {
                 color="#23a8d9"
                 style={{
                   elevation: 20,
+                  shadowColor: "#23a8d9",
                 }}
               />
             );

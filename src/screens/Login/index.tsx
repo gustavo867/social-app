@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import * as S from "./styles";
+import firebase from "firebase";
 
 import Text from "../../components/Text";
 import Input from "../../components/Input";
@@ -12,18 +13,15 @@ const Login: React.FC = () => {
 
   const { navigate } = useNavigation();
 
-  const OnSubmit = useCallback(() => {
+  const OnSubmit = useCallback(async () => {
     setLoading(true);
 
-    setTimeout(() => {
-      if (email && password) {
-        console.log("Ta ok");
+    if (email && password) {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      navigate("Main");
+    }
 
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    }, 1000);
+    setLoading(false);
   }, [password, email]);
 
   return (
