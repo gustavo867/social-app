@@ -32,6 +32,7 @@ export interface Firebase {
   getUserInfo: (
     uid: string
   ) => Promise<firebase.firestore.DocumentData | undefined>;
+  logOut: () => Promise<boolean>;
 }
 
 const FirebaseContext = createContext(null);
@@ -122,6 +123,18 @@ const Firebase: Firebase = {
     } catch (error) {
       console.log("Error @getUserInfo:", error);
     }
+  },
+
+  logOut: async () => {
+    try {
+      await firebase.auth().signOut();
+
+      return true;
+    } catch (error) {
+      console.log("Error @logOut:", error);
+    }
+
+    return false;
   },
 };
 

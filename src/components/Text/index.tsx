@@ -3,9 +3,13 @@ import { TextProps } from "react-native";
 import styled from "styled-components/native";
 
 interface Props {
+  marginBottom?: number;
+  padding?: number;
+  marginTop?: number;
+  marginLeft?: number;
+  marginRight?: number;
   margin?: number;
   color?: string;
-  padding?: number;
 }
 
 interface TitleProps extends TextProps {
@@ -20,9 +24,13 @@ interface TitleProps extends TextProps {
   heavy?: boolean;
   center?: boolean;
   right?: boolean;
-  color?: string;
+  marginBottom?: number;
   padding?: number;
+  marginTop?: number;
+  marginLeft?: number;
+  marginRight?: number;
   margin?: number;
+  color?: string;
 }
 
 const TextStyle: React.FC<TitleProps> = ({ ...props }) => {
@@ -31,8 +39,12 @@ const TextStyle: React.FC<TitleProps> = ({ ...props }) => {
 
 const Text = styled.Text`
   color: ${(props: Props) => props.color ?? "#FFFFFF"};
-  margin: ${(props: Props) => props.margin ?? 0};
-  padding: ${(props: Props) => props.padding ?? 0};
+  margin: ${(props: Props) => props.margin ?? 0}px;
+  margin-top: ${(props: Props) => props.marginTop ?? 0}px;
+  margin-left: ${(props: Props) => props.marginLeft ?? 0}px;
+  margin-right: ${(props: Props) => props.marginRight ?? 0}px;
+  margin-bottom: ${(props: Props) => props.marginBottom ?? 0}px;
+  padding: ${(props: Props) => props.padding ?? 0}px;
 
   ${({ title, large, medium, small, tiny }: TitleProps) => {
     switch (true) {

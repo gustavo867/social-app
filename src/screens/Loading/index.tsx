@@ -1,18 +1,18 @@
-import React, { useContext, useEffect } from "react";
-import { ActivityIndicator } from "react-native";
+import React, { useContext } from "react";
+import { ActivityIndicator, LogBox } from "react-native";
 import * as S from "./styles";
 
 import Text from "../../components/Text";
 
 import { UserContext } from "../../context/UserContext";
 import { Firebase, FirebaseContext } from "../../context/FirebaseContext";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 interface UserInfo {
   email: string;
   uid: string;
   username: string;
-  profilePhoto: string;
+  profilePhotoUrl: string;
 }
 
 const Loading: React.FC = () => {
@@ -21,7 +21,9 @@ const Loading: React.FC = () => {
 
   const { navigate } = useNavigation();
 
-  useEffect(() => {
+  useFocusEffect(() => {
+    LogBox.ignoreAllLogs();
+
     setTimeout(async () => {
       const user = firebase.getCurrentUser();
 
@@ -33,9 +35,9 @@ const Loading: React.FC = () => {
         setUser({
           isLoggedIn: true,
           email: userInfo.email,
-          uid: userInfo.uid,
+          uid: user.uid,
           username: userInfo.username,
-          profilePhotoUrl: userInfo.profilePhoto,
+          profilePhotoUrl: userInfo.profilePhotoUrl,
         });
 
         navigate("Main");
@@ -45,7 +47,7 @@ const Loading: React.FC = () => {
         navigate("Auth");
       }
     }, 500);
-  }, []);
+  });
 
   return (
     <S.Container>

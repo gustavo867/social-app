@@ -18,7 +18,7 @@ const Login: React.FC = () => {
 
     if (email && password) {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      navigate("Main");
+      navigate("Loading");
     }
 
     setLoading(false);
